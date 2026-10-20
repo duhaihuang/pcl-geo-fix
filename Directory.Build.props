@@ -1,0 +1,9 @@
+<Project>
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>duhaihuang</Authors>
+    <Copyright>Copyright (c) 2026 duhaihuang</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/duhaihuang/pcl-geo-fix</RepositoryUrl>
+  </PropertyGroup>
+</Project>

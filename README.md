@@ -51,8 +51,18 @@ dotnet publish .\PCL.GeoFix.Launcher\PCL.GeoFix.Launcher.csproj `
 - An unsupported PCL build will be stopped instead of continuing in an uncertain state.
 - This project is not affiliated with or endorsed by the PCL or PCL Community Edition maintainers.
 
-Third-party notices are included in the executable and can be displayed with:
+## License
+
+PCL-Geo-Fix is licensed under the [MIT License](LICENSE). It does not include
+or distribute PCL Community Edition; PCL Community Edition remains subject to
+its own license terms.
+
+The project license and third-party notices are included in the executable and
+can be displayed with:
 
 ```powershell
 .\PCL-Geo-Fix.exe --licenses
 ```
+
+Harmony attribution and license details are also available in
+[THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt).

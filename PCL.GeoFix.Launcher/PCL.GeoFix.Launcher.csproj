@@ -17,6 +17,8 @@
                       ReferenceOutputAssembly="false" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\LICENSE"
+                      LogicalName="PclGeoFix.License.txt" />
     <EmbeddedResource Include="..\PCL.GeoFix.Hook\bin\$(Configuration)\net10.0\PCL.GeoFix.Hook.dll"
                       LogicalName="PclGeoFix.Payload.PCL.GeoFix.Hook.dll" />
     <EmbeddedResource Include="..\PCL.GeoFix.Patcher\bin\$(Configuration)\net10.0\PCL.GeoFix.Patcher.dll"

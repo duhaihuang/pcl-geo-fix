@@ -22,6 +22,11 @@ internal static class Program
             }
             if (options.ShowLicenses)
             {
+                Console.WriteLine("PCL-Geo-Fix License");
+                Console.WriteLine();
+                Console.WriteLine(ReadEmbeddedText("PclGeoFix.License.txt"));
+                Console.WriteLine("Third-Party Notices");
+                Console.WriteLine();
                 Console.WriteLine(ReadEmbeddedText("PclGeoFix.ThirdPartyNotices.txt"));
                 return 0;
             }

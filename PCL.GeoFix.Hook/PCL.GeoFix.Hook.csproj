@@ -3,7 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>PCL.Unblock.Hook</AssemblyName>
-    <RootNamespace>PclUnblock.Hook</RootNamespace>
+    <AssemblyName>PCL.GeoFix.Hook</AssemblyName>
+    <RootNamespace>PclGeoFix.Hook</RootNamespace>
   </PropertyGroup>
 </Project>

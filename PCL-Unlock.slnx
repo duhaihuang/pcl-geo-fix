@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="PCL.Unblock.Hook/PCL.Unblock.Hook.csproj" />
-  <Project Path="PCL.Unblock.Patcher/PCL.Unblock.Patcher.csproj" />
-  <Project Path="PCL.Unblock.Launcher/PCL.Unblock.Launcher.csproj" />
-</Solution>

@@ -1,6 +1,6 @@
-# PCL-Unlock
+# PCL-Geo-Fix
 
-PCL-Unlock is an independent region-detection compatibility helper for PCL Community Edition.
+PCL-Geo-Fix is an independent region-detection compatibility helper for PCL Community Edition.
 
 Some Windows installations expose incomplete or inconsistent regional metadata. As a result, a device located outside Mainland China may be incorrectly classified as being inside Mainland China, causing game-management features to become unavailable.
 
@@ -15,22 +15,22 @@ This helper is intended only for users outside Mainland China who are affected b
 ## Usage
 
 Download the official x64 PCL Community Edition release and place
-`PCL-Unlock.exe` in the same directory as `PCL2_CE_Release_x64.exe`, then run:
+`PCL-Geo-Fix.exe` in the same directory as `PCL2_CE_Release_x64.exe`, then run:
 
 ```powershell
-.\PCL-Unlock.exe
+.\PCL-Geo-Fix.exe
 ```
 
 To select the launcher explicitly:
 
 ```powershell
-.\PCL-Unlock.exe --pcl "C:\path\to\a-custom-pcl-name.exe"
+.\PCL-Geo-Fix.exe --pcl "C:\path\to\a-custom-pcl-name.exe"
 ```
 
 To perform a compatibility check without opening the launcher:
 
 ```powershell
-.\PCL-Unlock.exe --verify-only --pcl "C:\path\to\a-custom-pcl-name.exe"
+.\PCL-Geo-Fix.exe --verify-only --pcl "C:\path\to\a-custom-pcl-name.exe"
 ```
 
 Additional launcher arguments can be passed after `--`.
@@ -38,7 +38,7 @@ Additional launcher arguments can be passed after `--`.
 ## Building
 
 ```powershell
-dotnet publish .\PCL.Unblock.Launcher\PCL.Unblock.Launcher.csproj `
+dotnet publish .\PCL.GeoFix.Launcher\PCL.GeoFix.Launcher.csproj `
   -c Release `
   -o .\artifacts\win-x64
 ```
@@ -54,5 +54,5 @@ dotnet publish .\PCL.Unblock.Launcher\PCL.Unblock.Launcher.csproj `
 Third-party notices are included in the executable and can be displayed with:
 
 ```powershell
-.\PCL-Unlock.exe --licenses
+.\PCL-Geo-Fix.exe --licenses
 ```

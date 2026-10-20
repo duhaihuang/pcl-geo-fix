@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="PCL.GeoFix.Hook/PCL.GeoFix.Hook.csproj" />
+  <Project Path="PCL.GeoFix.Patcher/PCL.GeoFix.Patcher.csproj" />
+  <Project Path="PCL.GeoFix.Launcher/PCL.GeoFix.Launcher.csproj" />
+</Solution>

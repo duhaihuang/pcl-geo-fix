@@ -4,7 +4,7 @@ using System.Runtime.Loader;
 public static class StartupHook
 {
     private const string TargetAssemblyName = "Plain Craft Launcher 2";
-    private const string PatcherAssemblyName = "PCL.Unblock.Patcher";
+    private const string PatcherAssemblyName = "PCL.GeoFix.Patcher";
     private const string HarmonyAssemblyName = "0Harmony";
 
     public static void Initialize()
@@ -15,19 +15,19 @@ public static class StartupHook
 
         try
         {
-            var payloadDirectory = RequireEnvironmentVariable("PCL_UNLOCK_PAYLOAD_DIR");
-            var statusPath = RequireEnvironmentVariable("PCL_UNLOCK_STATUS_PATH");
+            var payloadDirectory = RequireEnvironmentVariable("PCL_GEO_FIX_PAYLOAD_DIR");
+            var statusPath = RequireEnvironmentVariable("PCL_GEO_FIX_STATUS_PATH");
             AssemblyLoadContext.Default.Resolving += (_, name) => ResolvePayload(payloadDirectory, name);
 
             var patcherPath = Path.Combine(payloadDirectory, PatcherAssemblyName + ".dll");
             var patcherAssembly = AssemblyLoadContext.Default.LoadFromAssemblyPath(patcherPath);
-            var entryPoint = patcherAssembly.GetType("PclUnblock.Patcher.EntryPoint", throwOnError: true)!;
+            var entryPoint = patcherAssembly.GetType("PclGeoFix.Patcher.EntryPoint", throwOnError: true)!;
             var initialize = entryPoint.GetMethod("Initialize", BindingFlags.Public | BindingFlags.Static)
                              ?? throw new MissingMethodException(entryPoint.FullName, "Initialize");
             var result = initialize.Invoke(null, null)?.ToString() ?? "patched";
 
             WriteStatus(statusPath, "READY", result);
-            if (Environment.GetEnvironmentVariable("PCL_UNLOCK_VERIFY_ONLY") == "1")
+            if (Environment.GetEnvironmentVariable("PCL_GEO_FIX_VERIFY_ONLY") == "1")
                 Environment.Exit(0);
         }
         catch (Exception ex)
@@ -36,7 +36,7 @@ public static class StartupHook
                 ? inner
                 : ex;
             TryWriteFailure(root);
-            Environment.FailFast("PCL-Unlock failed before launcher startup.", root);
+            Environment.FailFast("PCL-Geo-Fix failed before launcher startup.", root);
         }
     }
 
@@ -59,7 +59,7 @@ public static class StartupHook
     {
         try
         {
-            var statusPath = Environment.GetEnvironmentVariable("PCL_UNLOCK_STATUS_PATH");
+            var statusPath = Environment.GetEnvironmentVariable("PCL_GEO_FIX_STATUS_PATH");
             if (!string.IsNullOrWhiteSpace(statusPath))
                 WriteStatus(statusPath, "ERROR", exception.ToString());
         }

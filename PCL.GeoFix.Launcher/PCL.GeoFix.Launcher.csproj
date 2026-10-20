@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>PCL-Geo-Fix</AssemblyName>
+    <RootNamespace>PclGeoFix.Launcher</RootNamespace>
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PCL.GeoFix.Hook\PCL.GeoFix.Hook.csproj"
+                      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\PCL.GeoFix.Patcher\PCL.GeoFix.Patcher.csproj"
+                      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\PCL.GeoFix.Hook\bin\$(Configuration)\net10.0\PCL.GeoFix.Hook.dll"
+                      LogicalName="PclGeoFix.Payload.PCL.GeoFix.Hook.dll" />
+    <EmbeddedResource Include="..\PCL.GeoFix.Patcher\bin\$(Configuration)\net10.0\PCL.GeoFix.Patcher.dll"
+                      LogicalName="PclGeoFix.Payload.PCL.GeoFix.Patcher.dll" />
+    <EmbeddedResource Include="..\PCL.GeoFix.Patcher\bin\$(Configuration)\net10.0\0Harmony.dll"
+                      LogicalName="PclGeoFix.Payload.0Harmony.dll" />
+    <EmbeddedResource Include="..\THIRD-PARTY-NOTICES.txt"
+                      LogicalName="PclGeoFix.ThirdPartyNotices.txt" />
+  </ItemGroup>
+</Project>

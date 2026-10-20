@@ -1,4 +1,4 @@
-PCL-Unlock includes Harmony (Lib.Harmony 2.4.3).
+PCL-Geo-Fix includes Harmony (Lib.Harmony 2.4.3).
 
 MIT License
 

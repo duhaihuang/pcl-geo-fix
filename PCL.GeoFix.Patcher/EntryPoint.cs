@@ -1,7 +1,7 @@
 using System.Reflection;
 using HarmonyLib;
 
-namespace PclUnblock.Patcher;
+namespace PclGeoFix.Patcher;
 
 public static class EntryPoint
 {
@@ -19,7 +19,7 @@ public static class EntryPoint
                                 ?? throw new MissingMethodException(policyType.FullName,
                                     "ThrowIfRestricted(string)");
 
-        var harmony = new Harmony("io.github.pcl-unblock.region-policy");
+        var harmony = new Harmony("io.github.pcl-geo-fix.region-policy");
         harmony.Patch(isRestrictedGetter, prefix: Prefix(nameof(Prefixes.AllowIsRestricted)));
         harmony.Patch(check, prefix: Prefix(nameof(Prefixes.AllowCheck)));
         harmony.Patch(throwIfRestricted, prefix: Prefix(nameof(Prefixes.SkipThrowIfRestricted)));
@@ -37,12 +37,12 @@ public static class EntryPoint
     {
         if (isRestrictedGetter.Invoke(null, null) is not false)
             throw new InvalidOperationException("Patched IsRestricted self-test failed.");
-        if (check.Invoke(null, ["pcl-unlock-self-test", false]) is not true)
+        if (check.Invoke(null, ["pcl-geo-fix-self-test", false]) is not true)
             throw new InvalidOperationException("Patched Check self-test failed.");
 
         try
         {
-            throwIfRestricted.Invoke(null, ["pcl-unlock-self-test"]);
+            throwIfRestricted.Invoke(null, ["pcl-geo-fix-self-test"]);
         }
         catch (TargetInvocationException ex)
         {

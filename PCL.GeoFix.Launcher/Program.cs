@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Resources;
 using System.Security.Cryptography;
 
-namespace PclUnblock.Launcher;
+namespace PclGeoFix.Launcher;
 
 internal static class Program
 {
@@ -16,29 +16,29 @@ internal static class Program
             var options = Options.Parse(args);
             if (options.ShowHelp)
             {
-                Console.WriteLine("Usage: PCL-Unlock [--pcl <path>] [--verify-only] [-- <PCL arguments>]");
-                Console.WriteLine("       PCL-Unlock --licenses");
+                Console.WriteLine("Usage: PCL-Geo-Fix [--pcl <path>] [--verify-only] [-- <PCL arguments>]");
+                Console.WriteLine("       PCL-Geo-Fix --licenses");
                 return 0;
             }
             if (options.ShowLicenses)
             {
-                Console.WriteLine(ReadEmbeddedText("PclUnblock.ThirdPartyNotices.txt"));
+                Console.WriteLine(ReadEmbeddedText("PclGeoFix.ThirdPartyNotices.txt"));
                 return 0;
             }
             var launcherDirectory = AppContext.BaseDirectory;
             var payloadDirectory = ExtractPayload();
-            var hookPath = Path.Combine(payloadDirectory, "PCL.Unblock.Hook.dll");
+            var hookPath = Path.Combine(payloadDirectory, "PCL.GeoFix.Hook.dll");
             ValidatePayload(payloadDirectory, hookPath);
 
             var pclPath = Path.GetFullPath(options.PclPath ?? Path.Combine(launcherDirectory, DefaultPclFileName));
             if (!File.Exists(pclPath))
                 throw new FileNotFoundException(
-                    $"PCL executable was not found. Place {DefaultPclFileName} next to PCL-Unlock.exe or use --pcl <path>.",
+                    $"PCL executable was not found. Place {DefaultPclFileName} next to PCL-Geo-Fix.exe or use --pcl <path>.",
                     pclPath);
 
             var sessionDirectory = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "PCL-Unlock", "sessions", Guid.NewGuid().ToString("N"));
+                "PCL-Geo-Fix", "sessions", Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(sessionDirectory);
             var statusPath = Path.Combine(sessionDirectory, "status.txt");
 
@@ -57,10 +57,10 @@ internal static class Program
             startInfo.Environment["DOTNET_STARTUP_HOOKS"] = string.IsNullOrWhiteSpace(existingHooks)
                 ? hookPath
                 : existingHooks + Path.PathSeparator + hookPath;
-            startInfo.Environment["PCL_UNLOCK_PAYLOAD_DIR"] = payloadDirectory;
-            startInfo.Environment["PCL_UNLOCK_STATUS_PATH"] = statusPath;
+            startInfo.Environment["PCL_GEO_FIX_PAYLOAD_DIR"] = payloadDirectory;
+            startInfo.Environment["PCL_GEO_FIX_STATUS_PATH"] = statusPath;
             if (options.VerifyOnly)
-                startInfo.Environment["PCL_UNLOCK_VERIFY_ONLY"] = "1";
+                startInfo.Environment["PCL_GEO_FIX_VERIFY_ONLY"] = "1";
 
             using var process = Process.Start(startInfo)
                                 ?? throw new InvalidOperationException("Failed to start PCL.");
@@ -72,7 +72,7 @@ internal static class Program
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine($"PCL-Unlock: {ex.Message}");
+            Console.Error.WriteLine($"PCL-Geo-Fix: {ex.Message}");
             return 1;
         }
     }
@@ -90,9 +90,9 @@ internal static class Program
         var assembly = Assembly.GetExecutingAssembly();
         var resources = new[]
         {
-            new PayloadResource("PclUnblock.Payload.PCL.Unblock.Hook.dll", "PCL.Unblock.Hook.dll"),
-            new PayloadResource("PclUnblock.Payload.PCL.Unblock.Patcher.dll", "PCL.Unblock.Patcher.dll"),
-            new PayloadResource("PclUnblock.Payload.0Harmony.dll", "0Harmony.dll")
+            new PayloadResource("PclGeoFix.Payload.PCL.GeoFix.Hook.dll", "PCL.GeoFix.Hook.dll"),
+            new PayloadResource("PclGeoFix.Payload.PCL.GeoFix.Patcher.dll", "PCL.GeoFix.Patcher.dll"),
+            new PayloadResource("PclGeoFix.Payload.0Harmony.dll", "0Harmony.dll")
         };
         var payloads = resources.Select(resource =>
         {
@@ -112,7 +112,7 @@ internal static class Program
         var version = Convert.ToHexString(combinedHash.GetHashAndReset())[..16];
         var payloadDirectory = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "PCL-Unlock", "payload", version);
+            "PCL-Geo-Fix", "payload", version);
         Directory.CreateDirectory(payloadDirectory);
 
         foreach (var (resource, bytes) in payloads)
@@ -135,7 +135,7 @@ internal static class Program
         foreach (var path in new[]
                  {
                      hookPath,
-                     Path.Combine(payloadDirectory, "PCL.Unblock.Patcher.dll"),
+                     Path.Combine(payloadDirectory, "PCL.GeoFix.Patcher.dll"),
                      Path.Combine(payloadDirectory, "0Harmony.dll")
                  })
         {

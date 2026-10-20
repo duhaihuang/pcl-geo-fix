@@ -7,7 +7,7 @@ namespace PclUnblock.Launcher;
 
 internal static class Program
 {
-    private const string DefaultPclFileName = "Plain Craft Launcher 2.exe";
+    private const string DefaultPclFileName = "PCL2_CE_Release_x64.exe";
 
     public static int Main(string[] args)
     {
@@ -32,7 +32,9 @@ internal static class Program
 
             var pclPath = Path.GetFullPath(options.PclPath ?? Path.Combine(launcherDirectory, DefaultPclFileName));
             if (!File.Exists(pclPath))
-                throw new FileNotFoundException("PCL executable was not found. Use --pcl <path>.", pclPath);
+                throw new FileNotFoundException(
+                    $"PCL executable was not found. Place {DefaultPclFileName} next to PCL-Unlock.exe or use --pcl <path>.",
+                    pclPath);
 
             var sessionDirectory = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),

@@ -14,7 +14,8 @@ This helper is intended only for users outside Mainland China who are affected b
 
 ## Usage
 
-Place `PCL-Unlock.exe` in the same directory as `Plain Craft Launcher 2.exe`, then run:
+Download the official x64 PCL Community Edition release and place
+`PCL-Unlock.exe` in the same directory as `PCL2_CE_Release_x64.exe`, then run:
 
 ```powershell
 .\PCL-Unlock.exe
@@ -23,13 +24,13 @@ Place `PCL-Unlock.exe` in the same directory as `Plain Craft Launcher 2.exe`, th
 To select the launcher explicitly:
 
 ```powershell
-.\PCL-Unlock.exe --pcl "C:\path\to\Plain Craft Launcher 2.exe"
+.\PCL-Unlock.exe --pcl "C:\path\to\a-custom-pcl-name.exe"
 ```
 
 To perform a compatibility check without opening the launcher:
 
 ```powershell
-.\PCL-Unlock.exe --verify-only --pcl "C:\path\to\Plain Craft Launcher 2.exe"
+.\PCL-Unlock.exe --verify-only --pcl "C:\path\to\a-custom-pcl-name.exe"
 ```
 
 Additional launcher arguments can be passed after `--`.
